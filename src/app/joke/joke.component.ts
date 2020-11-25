@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Joke } from '../joke-form/joke-form.component';
+import { Joke } from '../joke-class';
+import { JokeListService } from '../joke-list-service.service';
 
 @Component({
   selector: 'app-joke',
@@ -10,10 +11,13 @@ export class JokeComponent implements OnInit {
 
   @Input('joke') data: Joke;
 
-  @Output() JokeSelected = new EventEmitter<Joke>();
+  //@Output() JokeSelected = new EventEmitter<Joke>() output que envia la broma al padre;
 
-  selectJoke(id) {
-    this.JokeSelected.emit(this.data)
+  constructor(private jokelist: JokeListService) {}
+
+  DeleteJoke() {
+    //this.JokeSelected.emit(this.data) asi con output
+    this.jokelist.removeJoke(this.data)
   }
   
 

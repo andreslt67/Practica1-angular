@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Joke } from '../joke-form/joke-form.component';
+import { Joke } from '../joke-class';
+import { JokeListService } from '../joke-list-service.service'
 
 @Component({
   selector: 'app-joke-list',
@@ -7,23 +8,12 @@ import { Joke } from '../joke-form/joke-form.component';
   styleUrls: ['./joke-list.component.css']
 })
 export class JokeListComponent implements OnInit {
+  
   jokes: Joke[];
 
-  constructor() {
-    this.jokes = [
-      new Joke("What did the cheese say when it looked in the mirror?", "Hellome (Halloumi)"),
-      new Joke("What kind of cheese do you use to disguise a small horse?", "Mask-a-pony (Mascarpone)"),
-      new Joke("A kid threw a lump of cheddar at me", "I thought ‘That’s not very mature’")
-    ];
-   }
-
-   addJoke(joke) {
-     this.jokes.unshift(joke);
-   }
-
-   removeJoke(id) {
-     this.jokes.splice(id, 1);
-   }
+  constructor(private jokelist: JokeListService) {
+    this.jokes = this.jokelist.getJokeList();
+  }
 
   ngOnInit(): void {
   }

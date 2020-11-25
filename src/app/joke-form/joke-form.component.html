@@ -2,11 +2,21 @@
     <h4 class="card-title">
         create Joke
     </h4>
-    <div class="form-group">
-        <input type="text" class="form-control" placeholder="Enter the setup" #setup>
-        <input type="text" class="form-control" placeholder="Enter the punchline" #punchline>
-    </div>
-    <button type="button" class="btn btn-primary" (click)="createJoke(setup.value, punchline.value)">
+    <form [formGroup]="formJoke" class="form-group">
+        <div [ngClass]="{'invalid': formJoke.controls.textSetup.invalid && formJoke.controls.textSetup.dirty}">
+            <input type="text" formControlName="textSetup" class="form-control" placeholder="Enter the setup">
+        </div>
+        <div class="form-control-feedback" *ngIf="formJoke.controls.textSetup.invalid && formJoke.controls.textSetup.dirty">
+            Field is invalid
+        </div>
+        <div [ngClass]="{'invalid': formJoke.controls.textPunchline.invalid && formJoke.controls.textPunchline.dirty}">
+            <input type="text" formControlName="textPunchline" class="form-control" placeholder="Enter the punchline">
+        </div> 
+        <div class="form-control-feedback" *ngIf="formJoke.controls.textPunchline.invalid && formJoke.controls.textPunchline.dirty">
+            Field is invalid
+        </div>
+    </form>
+    <button type="button" class="btn btn-primary" (click)="createJoke()" [disabled]="formJoke.controls.textSetup.invalid || formJoke.controls.textPunchline.invalid">
         Create
     </button>
 </div>

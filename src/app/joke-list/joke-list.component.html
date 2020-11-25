@@ -1,2 +1,4 @@
-<app-joke-form (jokeCreated)="addJoke($event)"></app-joke-form>
-<app-joke *ngFor="let j of jokes" [joke]="j" (JokeSelected)="removeJoke($event)"></app-joke>
+<!-- <app-joke-form (jokeCreated)="addJoke($event)"></app-joke-form> asi seria con output en el joke-form -->
+<app-joke-form></app-joke-form>
+<!-- <app-joke *ngFor="let j of jokes" [joke]="j" (JokeSelected)="removeJoke($event)"></app-joke> asi seria con output en el componente hijo -->
+<app-joke *ngFor="let j of jokes" [joke]="j"></app-joke>
